@@ -33,9 +33,6 @@ angular.module('app', [])
     this.generateEntity = function() {
         var supportedTables = [];
 		
-        // TODONE :)
-        // randomly add 1-3 tables with no duplicates
-		
 		//make a copy of the available tables
 		let tablesLeft = [...this.AVAILABLE_TABLES];
 		
