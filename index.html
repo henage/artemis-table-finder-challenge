@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta charset="utf-8">
+        <meta name="viewport" content="minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="main.css" />
+		<link href="https://fonts.googleapis.com/css?family=Dosis|Rammetto+One|Ubuntu" rel="stylesheet">
+		
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+		
+    </head>
+    <body ng-cloak ng-app="app" ng-controller="mainController as ctrl">
+      <div class="container-fluid">
+			<div class="row first-row col-md-12" >
+				<div class="main-wrapper col-md-4 col-sm-12">
+					<h1>Best Table Finder</h1>
+					<button class="btn btn-primary grab-button" ng-click="ctrl.generateTableResults()">Grab Optimal</button>
+				</div>
+				<div class="best-table-wrapper col-md-4 col-sm-12" ng-show="ctrl.bestTable">
+					<div class="best-table-header">Optimal Table Found</div>
+					<div class="best-table">{{ctrl.bestTable}}</div>
+				</div>
+			</div>
+			
+			<!-- TODONE display the generated measures, dimensions, and filters along with chosen table -->
+			<div class="result-wrapper col-md-8 col-sm-12" ng-show="ctrl.measures" >
+				<div class="result-header">Results</div>
+				<div class="result-body row">
+					<div class="entity-wrapper col-md-4 col-xs-12">
+						<div class="entity-header">Measures</div>
+						<div class="indent entity" ng-repeat="measure in ctrl.measures">
+							<div class="entity-table" ng-repeat="table in measure.supportedTables" ng-class="{inclusion: table == ctrl.bestTable}">{{table}}</div>
+						</div>
+					</div>
+					<div class="entity-wrapper col-md-4 col-xs-12">
+						<div class="entity-header">Dimensions</div>
+						<div class="indent entity-table" ng-hide="ctrl.dimensions.length">[none]</div>
+						<div class="indent entity" ng-repeat="measure in ctrl.dimensions">
+							<div class="entity-table" ng-repeat="table in measure.supportedTables" ng-class="{inclusion: table == ctrl.bestTable}">{{table}}</div>
+						</div>
+					</div>
+					<div class="entity-wrapper col-md-4 col-xs-12">
+						<div class="entity-header">Filters</div>
+						<div class="indent entity-table" ng-hide="ctrl.filters.length">[none]</div>
+						<div class="indent entity" ng-repeat="filter in ctrl.filters">
+							<div class="entity-table" ng-repeat="table in filter.supportedTables" ng-class="{inclusion: table == ctrl.bestTable}">{{table}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+      </div>
+
+    </body>
+</html>
