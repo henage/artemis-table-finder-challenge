@@ -1,4 +1,4 @@
-angular.module('app', [])
+angular.module('app', ['ngAnimate'])
 
 .controller('mainController', ['service', function(service) {
     
@@ -92,21 +92,16 @@ angular.module('app', [])
     this.findBestTable = function(tablesInclusionCounter) {
         var table = '';
 
-		//find the best table from results
-		let bestTable = null;
 		for(let key in tablesInclusionCounter) {
 			//to be a valid table, it must be within measures
 			if(tablesInclusionCounter[key].entityTypes.indexOf("measures")!==-1) {
-				if(bestTable === null || tablesInclusionCounter[key].count > bestTable.count)
-					bestTable = {[key]:tablesInclusionCounter[key]};
-				else if(tablesInclusionCounter[key].count === bestTable.count && tablesInclusionCounter[key].entityTypes.length > bestTable.entityTypes.length)
-					bestTable = {[key]:tablesInclusionCounter[key]}; //tie breaker
+				if(table === '' || tablesInclusionCounter[key].count > tablesInclusionCounter[table].count)
+					table = key;
+				else if(tablesInclusionCounter[key].count === tablesInclusionCounter[table].count && tablesInclusionCounter[key].entityTypes.length > tablesInclusionCounter[table].entityTypes.length)
+					table = key; //tie breaker
 			}
 		}
 		
-		//grab the table name and return it as the best table
-		let key = Object.keys(bestTable);
-		table = key[0];
         return table;
     }
 })
