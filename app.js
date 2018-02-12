@@ -3,6 +3,7 @@ angular.module('app', ['ngAnimate'])
 .controller('mainController', ['service', function(service) {
     
 	var self = this;
+	this.defaultState = false;
 	
 	this.generateTableResults = function() {
 		
@@ -101,7 +102,6 @@ angular.module('app', ['ngAnimate'])
 					table = key; //tie breaker
 			}
 		}
-		
         return table;
     }
 })
