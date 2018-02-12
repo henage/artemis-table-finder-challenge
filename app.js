@@ -3,7 +3,6 @@ angular.module('app', ['ngAnimate'])
 .controller('mainController', ['service', function(service) {
     
 	var self = this;
-	this.defaultState = false;
 	
 	this.generateTableResults = function() {
 		

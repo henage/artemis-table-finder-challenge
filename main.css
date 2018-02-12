@@ -78,7 +78,9 @@ h1 {
 	transform: translate(0, 50px);
 	opacity: 0;
 }
-
+.entity-wrapper {
+	margin-bottom: 10px;
+}
 .entity-header {
 	font-size: 1.5em;
 	font-family: 'Ubuntu', sans-serif;
